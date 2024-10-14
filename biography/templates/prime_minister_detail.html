@@ -1,0 +1,45 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>{{ prime_minister.name }} Details</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">{{ prime_minister.name }}</h2>
+        
+        <div class="text-center mb-3">
+            {% if prime_minister.image %}
+                <img src="{{ prime_minister.image.url }}" alt="{{ prime_minister.name }}" class="img-thumbnail" style="height: 500px; width: 400px;">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+        </div>
+        
+        <h4>Biography</h4>
+        <p><strong>English:</strong> {{ prime_minister.english_bio }}</p>
+        <p><strong>Urdu:</strong> {{ prime_minister.urdu_bio }}</p>
+
+        <h4>Achievements</h4>
+        <p><strong>English:</strong> {{ prime_minister.english_achievements }}</p>
+        <p><strong>Urdu:</strong> {{ prime_minister.urdu_achievements }}</p>
+
+        <h4>Term:</h4>
+        <p>{{ prime_minister.term }}</p>
+        
+        {% if prime_minister.youtube_link %}
+        <h4>YouTube Link:</h4>
+        <a href="{{ prime_minister.youtube_link }}" target="_blank">{{ prime_minister.youtube_link }}</a>
+        {% endif %}
+        <br>
+        <br>
+        <hr>
+        <a href="{% url 'prime_ministers_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
+    <br>
+</body>
+</html>

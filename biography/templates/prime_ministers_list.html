@@ -1,0 +1,28 @@
+<!-- prime_ministers_list.html -->
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mt-4">
+    <h1 class="text-center mb-4">Prime Ministers List</h1>
+    <div class="row">
+        {% for prime_minister in prime_ministers %}
+        <div class="col-md-4 mb-4">
+            <div class="card shadow">
+                <img src="{{ prime_minister.image.url }}" class="card-img-top" alt="{{ prime_minister.name }}">
+                <div class="card-body">
+                    <h5 class="card-title">{{ prime_minister.name }}</h5>
+                    <p class="card-text">Term: {{ prime_minister.term }}</p>
+                    <a href="{% url 'prime_minister_detail' prime_minister.pk %}" class="btn btn-primary">View Details</a>
+                    <a href="{% url 'edit_prime_minister' prime_minister.pk %}" class="btn btn-warning">Edit</a>
+                    <form action="{% url 'delete_prime_minister' prime_minister.pk %}" method="post" style="display:inline;">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger" onclick="return confirm('Are you sure you want to delete this prime minister?');">Delete</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+    <a href="{% url 'add_prime_minister' %}" class="btn btn-success">Add Prime Minister</a>
+</div>
+{% endblock %}

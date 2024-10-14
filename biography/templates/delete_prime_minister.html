@@ -1,0 +1,7 @@
+<!-- delete_prime_minister.html -->
+<h1>Delete Prime Minister</h1>
+<p>Are you sure you want to delete {{ prime_minister.name }}?</p>
+<form method="post">
+    {% csrf_token %}
+    <button type="submit">Yes, delete</button>
+</form>

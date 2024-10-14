@@ -1,0 +1,65 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+    <title>Edit Prime Minister</title>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Edit Prime Minister</h2>
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" value="{{ prime_minister.name }}" required>
+            </div>
+            <div class="form-group">
+                <label for="english_bio">English Biography</label>
+                <textarea class="form-control" id="english_bio" name="english_bio" rows="3">{{ prime_minister.english_bio }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="urdu_bio">Urdu Biography</label>
+                <textarea class="form-control" id="urdu_bio" name="urdu_bio" rows="3">{{ prime_minister.urdu_bio }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="english_achievements">English Achievements</label>
+                <textarea class="form-control" id="english_achievements" name="english_achievements" rows="3">{{ prime_minister.english_achievements }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="urdu_achievements">Urdu Achievements</label>
+                <textarea class="form-control" id="urdu_achievements" name="urdu_achievements" rows="3">{{ prime_minister.urdu_achievements }}</textarea>
+            </div>
+            <div class="form-group">
+                <label for="youtube_link">YouTube Link</label>
+                <input type="text" class="form-control" id="youtube_link" name="youtube_link" value="{{ prime_minister.youtube_link }}">
+            </div>
+            <div class="form-group">
+                <label for="background_color">Background Color (Hex Code)</label>
+                <input type="text" class="form-control" id="background_color" name="background_color" value="{{ prime_minister.background_color }}" required>
+            </div>
+            <div class="form-group">
+                <label for="term">Term</label>
+                <input type="text" class="form-control" id="term" name="term" value="{{ prime_minister.term }}" required>
+            </div>
+            <div class="form-group">
+                <label for="current_image">Current Image</label>
+                {% if prime_minister.image %}
+                    <img src="{{ prime_minister.image.url }}" alt="{{ prime_minister.name }}" class="img-thumbnail mb-3" style="max-width: 200px;">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </div>
+            <div class="form-group">
+                <label for="image">Change Image</label>
+                <input type="file" class="form-control" id="image" name="image" accept="image/*">
+            </div>
+            <button type="submit" class="btn btn-primary">Update Prime Minister</button>
+        </form>
+        <a href="{% url 'prime_ministers_list' %}" class="btn btn-secondary mt-3">Back to List</a>
+    </div>
+</body>
+</html>
